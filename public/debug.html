@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Page</title>
+    <script>
+        window.onerror = function(message, source, lineno, colno, error) {
+            document.getElementById('errors').innerHTML += '<p>Error: ' + message + '</p>';
+            return true;
+        };
+
+        window.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Попытка загрузить основной скрипт
+                var script = document.createElement('script');
+                script.src = '/Third/assets/main-AfAoO0WN.js';
+                script.type = 'module';
+                script.onerror = function() {
+                    document.getElementById('errors').innerHTML += '<p>Failed to load main script</p>';
+                };
+                document.head.appendChild(script);
+
+                // Проверка доступности других ресурсов
+                fetch('/Third/vite.svg')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Failed to load vite.svg');
+                        document.getElementById('resources').innerHTML += '<p>vite.svg loaded successfully</p>';
+                    })
+                    .catch(error => {
+                        document.getElementById('resources').innerHTML += '<p>Error loading vite.svg: ' + error.message + '</p>';
+                    });
+            } catch (e) {
+                document.getElementById('errors').innerHTML += '<p>Exception: ' + e.message + '</p>';
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Debug Page</h1>
+    <div id="errors">
+        <h2>Errors:</h2>
+    </div>
+    <div id="resources">
+        <h2>Resources:</h2>
+    </div>
+</body>
+</html> 
