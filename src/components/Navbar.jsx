@@ -6,7 +6,7 @@ function Navbar() {
       <Container maxWidth="lg">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Моя коллекция картин
+            Моя коллекция
           </Typography>
         </Toolbar>
       </Container>
